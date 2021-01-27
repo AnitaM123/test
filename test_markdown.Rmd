@@ -1,0 +1,33 @@
+#!/usr/bin/env Rscript
+
+args <- commandArgs()
+fname <- normalizePath(sub("--file=", "", args[grepl("--file=", args)]))
+thisfile <- readLines(fname)
+newfname <- paste0(tempdir(), "/", basename(fname))
+writeLines(thisfile[-1:-which(thisfile == "q(\"no\")")], newfname)
+rmarkdown::render(newfname, output_dir = dirname(fname))
+q("no")
+
+---
+title: "This is just a test"
+author: "This is just a test"
+date: "27/1/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Opinions about fruit
+
+
+```{r getdatasetup, echo=TRUE}
+#install.packages("ggplot2")
+
+a <- c("Hi","Nice to meet you")
+
+
+a
+```
+
